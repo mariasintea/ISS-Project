@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddUpdateController">
+   <children>
+      <Button fx:id="sendButton" layoutX="240.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleSendResponse" prefHeight="25.0" prefWidth="120.0" text="Add/Update" />
+      <Label layoutX="164.0" layoutY="145.0" text="Name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="164.0" layoutY="201.0" text="Price">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="164.0" layoutY="255.0" text="Quantity">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" layoutX="296.0" layoutY="147.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="priceField" layoutX="296.0" layoutY="203.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="quantityField" layoutX="296.0" layoutY="257.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label fx:id="title" layoutX="164.0" layoutY="79.0" text="Add/Update Product">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

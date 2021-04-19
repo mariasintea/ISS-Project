@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlaceOrderController">
+   <children>
+      <Label layoutX="47.0" layoutY="40.0" text="List of Products">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="85.0" text="Product">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="123.0" layoutY="86.0" prefHeight="25.0" prefWidth="120.0" />
+      <Button layoutX="472.0" layoutY="86.0" mnemonicParsing="false" text="Add to List" />
+      <Label layoutX="282.0" layoutY="85.0" text="Quantity">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="364.0" layoutY="86.0" prefHeight="25.0" prefWidth="80.0" />
+      <Label layoutX="47.0" layoutY="128.0" text="Address">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="168.0" text="Street">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="250.0" />
+      <Label layoutX="378.0" layoutY="168.0" text="Number">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="464.0" layoutY="169.0" prefHeight="25.0" prefWidth="89.0" />
+      <Label layoutX="47.0" layoutY="206.0" text="City">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="300.0" layoutY="206.0" text="County">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="244.0" text="Country">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="92.0" layoutY="207.0" prefHeight="25.0" prefWidth="194.0" />
+      <TextField layoutX="374.0" layoutY="207.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField layoutX="123.0" layoutY="245.0" prefHeight="25.0" prefWidth="211.0" />
+      <Label layoutX="47.0" layoutY="283.0" text="Payment Method">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="211.0" layoutY="285.0" prefWidth="150.0" />
+      <Button layoutX="225.0" layoutY="337.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Place Order" />
+   </children>
+</AnchorPane>
