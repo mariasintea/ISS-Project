@@ -1,6 +1,4 @@
-# ISS-Project
-
-# Iteration planification
+# ISS-Project --- Iteration planification
 
 ## Iteration 1
   -	Database for products
