@@ -16,6 +16,9 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <mapping resource="model/Product.hbm.xml"/>
+        <mapping resource="model/domain/Product.hbm.xml"/>
+        <mapping resource="model/domain/Order.hbm.xml"/>
+        <mapping resource="model/domain/User.hbm.xml"/>
+        <mapping resource="model/domain/ProductsInOrder.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

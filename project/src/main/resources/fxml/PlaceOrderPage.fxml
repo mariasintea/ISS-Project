@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlaceOrderController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PlaceOrderView">
    <children>
       <Label layoutX="47.0" layoutY="40.0" text="List of Products">
          <font>
@@ -16,14 +16,14 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="123.0" layoutY="86.0" prefHeight="25.0" prefWidth="120.0" />
-      <Button layoutX="472.0" layoutY="86.0" mnemonicParsing="false" text="Add to List" />
+      <ChoiceBox fx:id="productsList" layoutX="123.0" layoutY="86.0" prefHeight="25.0" prefWidth="120.0" />
+      <Button layoutX="472.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleAddProduct" text="Add to List" />
       <Label layoutX="282.0" layoutY="85.0" text="Quantity">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="364.0" layoutY="86.0" prefHeight="25.0" prefWidth="80.0" />
+      <TextField fx:id="quantityField" layoutX="364.0" layoutY="86.0" prefHeight="25.0" prefWidth="80.0" />
       <Label layoutX="47.0" layoutY="128.0" text="Address">
          <font>
             <Font size="20.0" />
@@ -65,6 +65,6 @@
          </font>
       </Label>
       <ChoiceBox layoutX="211.0" layoutY="285.0" prefWidth="150.0" />
-      <Button layoutX="225.0" layoutY="337.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Place Order" />
+      <Button layoutX="225.0" layoutY="337.0" mnemonicParsing="false" onAction="#handlePlaceOrder" prefHeight="25.0" prefWidth="150.0" text="Place Order" />
    </children>
 </AnchorPane>

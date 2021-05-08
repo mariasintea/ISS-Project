@@ -784,7 +784,7 @@ false YEKT
 false Z
 false Zulu
 </TimeZones>
-      <StartupTime>1616704040</StartupTime>
+      <StartupTime>1618961871</StartupTime>
     </root>
     <database id="2" parent="1" name="cars">
       <ObjectId>33218</ObjectId>
@@ -798,9 +798,12 @@ false Zulu
     <database id="4" parent="1" name="salesagency">
       <ObjectId>33266</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>2136</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2221</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|33267|33269|1
+sequence|table|33278|33280|1
+sequence|table|33286|33288|1
+sequence|table|33297|33299|1
 </Relations>
     </database>
     <database id="5" parent="1" name="socialnetwork">
@@ -860,7 +863,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>2137</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2222</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="19" parent="4" name="heap">
@@ -930,18 +933,59 @@ false Zulu
     <language id="28" parent="4" name="internal"/>
     <language id="29" parent="4" name="plpgsql"/>
     <language id="30" parent="4" name="sql"/>
-    <sequence id="31" parent="18" name="products_id_seq">
+    <sequence id="31" parent="18" name="orders_id_seq">
+      <ObjectId>33297</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2217</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="32" parent="18" name="products_id_seq">
       <ObjectId>33267</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>2135</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="32" parent="18" name="products">
+    <sequence id="33" parent="18" name="products_in_order_id_seq">
+      <ObjectId>33278</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2205</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="34" parent="18" name="users_id_seq">
+      <ObjectId>33286</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2211</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <table id="35" parent="18" name="orders">
+      <ObjectId>33299</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2217</StateNumber>
+    </table>
+    <table id="36" parent="18" name="products">
       <ObjectId>33269</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>2135</StateNumber>
     </table>
-    <column id="33" parent="32" name="id">
+    <table id="37" parent="18" name="products_in_orders">
+      <ObjectId>33280</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2220</StateNumber>
+    </table>
+    <table id="38" parent="18" name="users">
+      <ObjectId>33288</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>2214</StateNumber>
+    </table>
+    <column id="39" parent="35" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2217</StateNumber>
+      <DefaultExpression>nextval(&apos;orders_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="40" parent="36" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -949,37 +993,117 @@ false Zulu
       <DefaultExpression>nextval(&apos;products_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="34" parent="32" name="name">
+    <column id="41" parent="36" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>2135</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="35" parent="32" name="price">
+    <column id="42" parent="36" name="price">
       <Position>3</Position>
       <DataType>real|0s</DataType>
       <StateNumber>2135</StateNumber>
       <TypeId>700</TypeId>
     </column>
-    <column id="36" parent="32" name="available_quantity">
+    <column id="43" parent="36" name="available_quantity">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>2135</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="37" parent="32" name="products_pk">
+    <index id="44" parent="36" name="products_pk">
       <ObjectId>33276</ObjectId>
       <StateNumber>2135</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="38" parent="32" name="products_pk">
+    <key id="45" parent="36" name="products_pk">
       <ObjectId>33277</ObjectId>
       <StateNumber>2135</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>products_pk</UnderlyingIndexName>
+    </key>
+    <column id="46" parent="37" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2205</StateNumber>
+      <DefaultExpression>nextval(&apos;products_in_order_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="47" parent="37" name="order_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>2205</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="48" parent="37" name="product_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>2205</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="49" parent="37" name="quantity">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>2220</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="50" parent="37" name="products_in_order_pk">
+      <ObjectId>33284</ObjectId>
+      <StateNumber>2205</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="51" parent="37" name="products_in_order_pk">
+      <ObjectId>33285</ObjectId>
+      <StateNumber>2205</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>products_in_order_pk</UnderlyingIndexName>
+    </key>
+    <column id="52" parent="38" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>2211</StateNumber>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="53" parent="38" name="username">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>2211</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="54" parent="38" name="password">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>2211</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="55" parent="38" name="role">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>2214</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="56" parent="38" name="users_pk">
+      <ObjectId>33295</ObjectId>
+      <StateNumber>2211</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="57" parent="38" name="users_pk">
+      <ObjectId>33296</ObjectId>
+      <StateNumber>2211</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>users_pk</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

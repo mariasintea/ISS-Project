@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainPageSalesmanView">
+    <children>
+        <Label layoutX="44.0" layoutY="30.0" text="Products">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <TableView fx:id="productsTable" layoutX="42.0" layoutY="82.0" prefHeight="224.0" prefWidth="515.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="58.33333969116211" text="id" />
+                <TableColumn fx:id="nameColumn" prefWidth="199.66667938232422" text="name" />
+            <TableColumn fx:id="priceColumn" prefWidth="114.33334350585938" text="price" />
+            <TableColumn fx:id="availableQuantityColumn" prefWidth="142.00003051757812" text="available quantity" />
+            </columns>
+        </TableView>
+        <Button layoutX="230.0" layoutY="328.0" mnemonicParsing="false" onAction="#handlePlaceOrder" prefHeight="25.0" prefWidth="140.0" text="Place Order" />
+    </children>
+</AnchorPane>

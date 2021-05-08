@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.domain.ProductsInOrder"
+           table="products_in_orders">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="orderId" column="order_id"/>
+        <property name="productId" column="product_id"/>
+        <property name="quantity" column="quantity"/>
+    </class>
+</hibernate-mapping>

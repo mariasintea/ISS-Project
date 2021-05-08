@@ -1,19 +1,30 @@
-import controller.MainPageAdministratorController;
-import controller.MainPageSalesmanController;
+import controllers.LogInController;
+import controllers.MainPageAdministratorController;
+import controllers.MainPageSalesmanController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import services.ProductsService;
+import model.repository.OrdersRepository;
+import model.repository.UsersRepository;
+import org.hibernate.SessionFactory;
+import model.repository.ProductsRepository;
+import services.Service;
+import services.utils.HibernateUtils;
+import views.LogInView;
+import views.MainPageAdministratorView;
+import views.MainPageSalesmanView;
 
 import java.io.IOException;
 
 public class Main extends Application {
+    HibernateUtils hibernateUtils = new HibernateUtils();
 
     @Override
     public void start(Stage stage) {
         try {
+            hibernateUtils.initialize();
             initView(stage);
         }
         catch (Exception e)
@@ -23,23 +34,47 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void stop(){
+        hibernateUtils.close();
+    }
+
+    public static void main() {
         launch();
     }
 
     private void initView(Stage primaryStage) throws IOException {
+        SessionFactory sessionFactory = hibernateUtils.getSessionFactory();
+        ProductsRepository productsRepository = new ProductsRepository(sessionFactory);
+        UsersRepository usersRepository = new UsersRepository(sessionFactory);
+        OrdersRepository ordersRepository = new OrdersRepository(sessionFactory);
+        Service service = new Service(productsRepository, usersRepository, ordersRepository);
 
-        ProductsService productsService = new ProductsService();
+        FXMLLoader loaderMainPageAdministrator = new FXMLLoader();
+        loaderMainPageAdministrator.setLocation(getClass().getResource("/fxml/MainPageAdministrator.fxml"));
+        MainPageAdministratorController controllerAdministrator = new MainPageAdministratorController();
+        controllerAdministrator.setUp(service);
+        Parent rootAdministrator = loaderMainPageAdministrator.load();
+        MainPageAdministratorView viewAdministrator = loaderMainPageAdministrator.getController();
+        viewAdministrator.setUp(controllerAdministrator);
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/MainPageAdministratorPage.fxml"));
-        //loader.setLocation(getClass().getResource("/fxml/MainPageSalesmanPage.fxml"));
-        AnchorPane pageLayout = loader.load();
-        primaryStage.setScene(new Scene(pageLayout));
+        FXMLLoader loaderMainPageSalesman = new FXMLLoader(getClass().getResource("/fxml/MainPageSalesman.fxml"));
+        MainPageSalesmanController controllerSalesman = new MainPageSalesmanController();
+        controllerSalesman.setUp(service);
+        Parent rootSalesman = loaderMainPageSalesman.load();
+        MainPageSalesmanView viewSalesman = loaderMainPageSalesman.getController();
+        viewSalesman.setUp(controllerSalesman);
 
-        MainPageAdministratorController controller = loader.getController();
-        //MainPageSalesmanController controller = loader.getController();
-        controller.setUp(productsService);
+        FXMLLoader loaderLogin = new FXMLLoader(getClass().getResource("/fxml/LogInPage.fxml"));
+        Parent root = loaderLogin.load();
+        LogInView viewLogIn = loaderLogin.getController();
+        LogInController controllerLogIn = new LogInController();
+        controllerLogIn.setUp(service);
+        viewLogIn.setUp(controllerLogIn, rootAdministrator, rootSalesman);
+
+        primaryStage.setTitle("Log In");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 }
 
