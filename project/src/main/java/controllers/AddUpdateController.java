@@ -26,10 +26,10 @@ public class AddUpdateController {
 
     public void handleSendResponse(String name, String price, String quantity) {
         if(operation.equals("update")) {
-            service.update(selectedProduct.getId(), name, Double.parseDouble(price), Integer.parseInt(quantity));
+            service.updateProduct(selectedProduct.getId(), name, Double.parseDouble(price), Integer.parseInt(quantity));
         }
         else{
-            service.add(name, Double.parseDouble(price), Integer.parseInt(quantity));
+            service.addProduct(name, Double.parseDouble(price), Integer.parseInt(quantity));
         }
     }
 }

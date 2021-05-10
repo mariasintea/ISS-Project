@@ -23,7 +23,7 @@ public class PlaceOrderController {
     }
 
     public List<String> getProducts(){
-        return service.getAll().stream().map(p -> p.getName()).collect(Collectors.toList());
+        return service.getAllProducts().stream().map(p -> p.getName()).collect(Collectors.toList());
     }
 
     public void addProduct(String productName, Integer quantity){
@@ -32,14 +32,14 @@ public class PlaceOrderController {
         productsQuantities.add(quantity);
     }
 
-    public boolean checkOrder(){
+    private boolean checkOrder(){
         for (int i = 0; i < productsList.size(); i++)
             if(!productsList.get(i).extractFromQuantity(productsQuantities.get(i)))
                 return false;
             return true;
     }
 
-    public int addOrder(){
+    public double addOrder(){
         if(!checkOrder())
             return -1;
         int orderId = service.addOrder();

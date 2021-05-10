@@ -51,8 +51,8 @@ public class PlaceOrderView {
     }
 
     public void handlePlaceOrder(ActionEvent event){
-        int total = controller.addOrder();
-        if (total >= 0)
+        double total = controller.addOrder();
+        if (total >= 0.0)
         {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Order Completed!");

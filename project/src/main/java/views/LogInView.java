@@ -20,7 +20,6 @@ public class LogInView {
     PasswordField password;
     LogInController controller;
     Parent parentAdministratorView;
-
     Parent parentSalesmanView;
 
     public LogInView() {

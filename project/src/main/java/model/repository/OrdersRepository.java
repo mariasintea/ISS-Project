@@ -53,20 +53,19 @@ public class OrdersRepository {
     }
 
 
-    public int getTotal(Integer orderId){
+    public Double getTotal(Integer orderId){
         try(Session session = sessionFactory.openSession()) {
             Transaction tx = null;
             try {
                 tx = session.beginTransaction();
-                int total = (Integer) session.createQuery("select sum(p.price * o.quantity) from ProductsInOrder o, Product p where p.id = o.productId and o.orderId = :orderId").setParameter("orderId", orderId).uniqueResult();
+                double total = (Double) session.createQuery("select sum(p.price * o.quantity) from ProductsInOrder o, Product p where p.id = o.productId and o.orderId = :orderId").setParameter("orderId", orderId).uniqueResult();
                 tx.commit();
-                System.out.println(total);
                 return total;
             } catch (RuntimeException ex) {
                 if (tx != null)
                     tx.rollback();
             }
         }
-        return 0;
+        return 0.0;
     }
 }

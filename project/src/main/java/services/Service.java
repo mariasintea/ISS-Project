@@ -51,23 +51,23 @@ public class Service implements Observable {
         notifyObservers();
     }
 
-    public int getTotalPrice(int orderId){
+    public double getTotalPrice(int orderId){
         return orderRepository.getTotal(orderId);
     }
 
-    public void add(String name, double price, int quantity){
+    public void addProduct(String name, double price, int quantity){
         Product newProduct = new Product(0, name, price, quantity);
         productRepository.add(newProduct);
         notifyObservers();
     }
 
-    public void update(int id, String name, double price, int quantity){
+    public void updateProduct(int id, String name, double price, int quantity){
         Product newProduct = new Product(id, name, price, quantity);
         productRepository.update(newProduct);
         notifyObservers();
     }
 
-    public void delete(int id, String name, double price, int quantity){
+    public void deleteProduct(int id, String name, double price, int quantity){
         Product newProduct = new Product(id, name, price, quantity);
         productRepository.delete(newProduct);
         notifyObservers();
@@ -77,7 +77,7 @@ public class Service implements Observable {
      * selects all products from database
      * @return list of existing products
      */
-    public List<Product> getAll(){
+    public List<Product> getAllProducts(){
         List<Product> products = productRepository.getAll();
         return products;
     }

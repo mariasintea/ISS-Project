@@ -29,7 +29,7 @@ public class MainPageAdministratorController{
     }
 
     public List<Product> getProducts() {
-        List<Product> productList = service.getAll();
+        List<Product> productList = service.getAllProducts();
         return productList;
     }
 
@@ -37,6 +37,6 @@ public class MainPageAdministratorController{
      * deletes selected Product from database
      */
     public void handleDelete() {
-        service.delete(selectedProduct.getId(), selectedProduct.getName(), selectedProduct.getPrice(), selectedProduct.getAvailableQuantity());
+        service.deleteProduct(selectedProduct.getId(), selectedProduct.getName(), selectedProduct.getPrice(), selectedProduct.getAvailableQuantity());
     }
 }

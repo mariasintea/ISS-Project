@@ -6,7 +6,6 @@ import services.Service;
 import java.util.List;
 
 public class MainPageSalesmanController{
-    Product selectedProduct;
     Service service;
 
     public MainPageSalesmanController() {
@@ -20,16 +19,12 @@ public class MainPageSalesmanController{
         this.service = service;
     }
 
-    public void setSelectedProduct(Product product) {
-        this.selectedProduct = product;
-    }
-
     public Service getService(){
         return service;
     }
 
     public List<Product> getProducts() {
-        List<Product> productList = service.getAll();
+        List<Product> productList = service.getAllProducts();
         return productList;
     }
 }
