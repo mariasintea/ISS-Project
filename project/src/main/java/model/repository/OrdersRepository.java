@@ -1,5 +1,6 @@
 package model.repository;
 
+import model.domain.Address;
 import model.domain.Order;
 import model.domain.ProductsInOrder;
 import org.hibernate.Session;
@@ -50,6 +51,27 @@ public class OrdersRepository {
                     tx.rollback();
             }
         }
+    }
+
+    /**
+     * adds address for order to database
+     * @param address - Address to be added
+     */
+    public int addAddress(Address address){
+        try(Session session = sessionFactory.openSession()) {
+            Transaction tx = null;
+            try {
+                tx = session.beginTransaction();
+                session.save(address);
+                int id = (Integer) session.createQuery("select max(a.id) from Address a").uniqueResult();
+                tx.commit();
+                return id;
+            } catch (RuntimeException ex) {
+                if (tx != null)
+                    tx.rollback();
+            }
+        }
+        return 0;
     }
 
 

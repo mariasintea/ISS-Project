@@ -34,13 +34,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="streetField" layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="250.0" />
       <Label layoutX="378.0" layoutY="168.0" text="Number">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="464.0" layoutY="169.0" prefHeight="25.0" prefWidth="89.0" />
+      <TextField fx:id="numberField" layoutX="464.0" layoutY="169.0" prefHeight="25.0" prefWidth="89.0" />
       <Label layoutX="47.0" layoutY="206.0" text="City">
          <font>
             <Font size="18.0" />
@@ -56,15 +56,15 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="92.0" layoutY="207.0" prefHeight="25.0" prefWidth="194.0" />
-      <TextField layoutX="374.0" layoutY="207.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField layoutX="123.0" layoutY="245.0" prefHeight="25.0" prefWidth="211.0" />
+      <TextField fx:id="cityField" layoutX="92.0" layoutY="207.0" prefHeight="25.0" prefWidth="194.0" />
+      <TextField fx:id="countyField" layoutX="374.0" layoutY="207.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="countryField" layoutX="123.0" layoutY="245.0" prefHeight="25.0" prefWidth="211.0" />
       <Label layoutX="47.0" layoutY="283.0" text="Payment Method">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="211.0" layoutY="285.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="paymentField" layoutX="211.0" layoutY="285.0" prefWidth="150.0" />
       <Button layoutX="225.0" layoutY="337.0" mnemonicParsing="false" onAction="#handlePlaceOrder" prefHeight="25.0" prefWidth="150.0" text="Place Order" />
    </children>
 </AnchorPane>

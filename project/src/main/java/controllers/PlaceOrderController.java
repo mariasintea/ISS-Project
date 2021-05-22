@@ -26,10 +26,18 @@ public class PlaceOrderController {
         return service.getAllProducts().stream().map(p -> p.getName()).collect(Collectors.toList());
     }
 
+    public Service getService() {
+        return service;
+    }
+
     public void addProduct(String productName, Integer quantity){
         Product product = service.findProduct(productName);
         productsList.add(product);
         productsQuantities.add(quantity);
+    }
+    public int addAddress(String street, Integer number, String city, String county, String country){
+        int addressId = service.addAddress(street, number, city, county, country);
+        return addressId;
     }
 
     private boolean checkOrder(){
@@ -39,10 +47,10 @@ public class PlaceOrderController {
             return true;
     }
 
-    public double addOrder(){
+    public double addOrder(int addressId, String payment){
         if(!checkOrder())
             return -1;
-        int orderId = service.addOrder();
+        int orderId = service.addOrder(addressId, payment);
         for (int i = 0; i < productsList.size(); i++)
             service.addProductToOrder(orderId, productsList.get(i).getId(), productsQuantities.get(i));
         return service.getTotalPrice(orderId);

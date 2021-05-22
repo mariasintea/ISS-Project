@@ -1,10 +1,8 @@
 package services;
 
-import model.domain.Order;
-import model.domain.Product;
-import model.domain.ProductsInOrder;
-import model.domain.User;
+import model.domain.*;
 import model.repository.OrdersRepository;
+import model.repository.PayPalUsersRepository;
 import model.repository.ProductsRepository;
 import model.repository.UsersRepository;
 import services.observer.Observable;
@@ -18,12 +16,14 @@ public class Service implements Observable {
     ProductsRepository productRepository;
     UsersRepository userRepository;
     OrdersRepository orderRepository;
+    PayPalUsersRepository paypalRepository;
 
-    public Service(ProductsRepository productRepository, UsersRepository userRepository, OrdersRepository orderRepository) {
+    public Service(ProductsRepository productRepository, UsersRepository userRepository, OrdersRepository orderRepository, PayPalUsersRepository paypalRepository) {
         observers = new ArrayList<>();
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
+        this.paypalRepository = paypalRepository;
     }
 
     public String checkUser(String username, String password){
@@ -33,12 +33,17 @@ public class Service implements Observable {
         return user.getRole();
     }
 
+    public boolean checkPayPalUser(String username, String password){
+        PayPalUser user = paypalRepository.findUser(username, password);
+        return user!=null;
+    }
+
     public Product findProduct(String name){
         return productRepository.findProduct(name);
     }
 
-    public int addOrder(){
-        Order order = new Order();
+    public int addOrder(int address, String payment){
+        Order order = new Order(0, address, payment);
         return orderRepository.addOrder(order);
     }
 
@@ -53,6 +58,11 @@ public class Service implements Observable {
 
     public double getTotalPrice(int orderId){
         return orderRepository.getTotal(orderId);
+    }
+
+    public int addAddress(String street, int number, String city, String county, String country){
+        Address newAddress = new Address(0, street, number, city, county, country);
+        return orderRepository.addAddress(newAddress);
     }
 
     public void addProduct(String name, double price, int quantity){

@@ -20,5 +20,7 @@
         <mapping resource="model/domain/Order.hbm.xml"/>
         <mapping resource="model/domain/User.hbm.xml"/>
         <mapping resource="model/domain/ProductsInOrder.hbm.xml"/>
+        <mapping resource="model/domain/Address.hbm.xml"/>
+        <mapping resource="model/domain/PayPalUser.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

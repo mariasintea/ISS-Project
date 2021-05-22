@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.domain.PayPalUser;
 import model.repository.OrdersRepository;
+import model.repository.PayPalUsersRepository;
 import model.repository.UsersRepository;
 import org.hibernate.SessionFactory;
 import model.repository.ProductsRepository;
@@ -48,7 +50,8 @@ public class Main extends Application {
         ProductsRepository productsRepository = new ProductsRepository(sessionFactory);
         UsersRepository usersRepository = new UsersRepository(sessionFactory);
         OrdersRepository ordersRepository = new OrdersRepository(sessionFactory);
-        Service service = new Service(productsRepository, usersRepository, ordersRepository);
+        PayPalUsersRepository paypalRepository = new PayPalUsersRepository(sessionFactory);
+        Service service = new Service(productsRepository, usersRepository, ordersRepository, paypalRepository);
 
         FXMLLoader loaderMainPageAdministrator = new FXMLLoader();
         loaderMainPageAdministrator.setLocation(getClass().getResource("/fxml/MainPageAdministrator.fxml"));
