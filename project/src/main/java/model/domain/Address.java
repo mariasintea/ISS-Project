@@ -1,6 +1,8 @@
 package model.domain;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
     int id;
     String street;
     int number;

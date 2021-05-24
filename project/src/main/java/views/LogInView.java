@@ -13,7 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class LogInView {
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class LogInView extends UnicastRemoteObject implements Serializable {
     @FXML
     TextField username;
     @FXML
@@ -22,7 +26,7 @@ public class LogInView {
     Parent parentAdministratorView;
     Parent parentSalesmanView;
 
-    public LogInView() {
+    public LogInView() throws RemoteException {
     }
 
     public void setUp(LogInController controller, Parent parentAdministratorView, Parent parentSalesmanView) {

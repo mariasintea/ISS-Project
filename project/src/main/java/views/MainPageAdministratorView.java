@@ -1,7 +1,7 @@
 package views;
 
-import controllers.AddUpdateController;
 import controllers.MainPageAdministratorController;
+import controllers.AddUpdateController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,12 +13,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.domain.Product;
-import services.Service;
+import services.IService;
 import services.observer.Observer;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class MainPageAdministratorView implements Observer {
+public class MainPageAdministratorView  extends UnicastRemoteObject implements Serializable, Observer {
     @FXML
     TableView<Product> productsTable;
     @FXML
@@ -32,7 +35,7 @@ public class MainPageAdministratorView implements Observer {
     ObservableList<Product> model = FXCollections.observableArrayList();
     MainPageAdministratorController controller;
 
-    public MainPageAdministratorView() {
+    public MainPageAdministratorView() throws RemoteException {
     }
 
     /**
@@ -41,7 +44,7 @@ public class MainPageAdministratorView implements Observer {
      */
     public void setUp(MainPageAdministratorController controller){
         this.controller = controller;
-        Service service = controller.getService();
+        IService service = controller.getService();
         service.addObserver(this);
         loadTable();
     }
@@ -67,6 +70,7 @@ public class MainPageAdministratorView implements Observer {
     /**
      * opens Add Product Page
      */
+    //TODO - make it work
     public void handleAdd() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/AddUpdatePage.fxml"));
@@ -85,7 +89,7 @@ public class MainPageAdministratorView implements Observer {
         }
         catch (Exception e)
         {
-
+            e.printStackTrace();
         }
     }
 

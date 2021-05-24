@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="hibernateUtils" class="services.utils.HibernateUtils"/>
+    <bean id="sessionFactory" class="org.hibernate.SessionFactory" factory-bean="hibernateUtils" factory-method="getSessionFactory"/>
+
+    <bean id="usersRepository" class="model.repository.UsersRepository">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="paypalRepository" class="model.repository.PayPalUsersRepository">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="ordersRepository" class="model.repository.OrdersRepository">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="productsRepository" class="model.repository.ProductsRepository">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="service" class="services.Service">
+        <constructor-arg ref="usersRepository"/>
+        <constructor-arg ref="paypalRepository"/>
+        <constructor-arg ref="productsRepository"/>
+        <constructor-arg ref="ordersRepository"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="SalesAgency"/>
+        <property name="service" ref="service"/>
+        <property name="serviceInterface" value="services.IService"/>
+        <property name="servicePort" value="1099"/>
+    </bean>
+</beans>

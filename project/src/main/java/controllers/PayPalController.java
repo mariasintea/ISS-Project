@@ -1,15 +1,19 @@
 package controllers;
 
-import services.Service;
+import services.IService;
 
-public class PayPalController {
-    Service service;
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-    public PayPalController(){
+public class PayPalController extends UnicastRemoteObject implements Serializable {
+    IService service;
+
+    public PayPalController() throws RemoteException {
 
     }
 
-    public void setUp(Service service) {
+    public void setUp(IService service) {
         this.service = service;
     }
 

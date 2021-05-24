@@ -1,22 +1,25 @@
 package controllers;
 
 import model.domain.Product;
-import services.Service;
+import services.IService;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PlaceOrderController {
-    Service service;
+public class PlaceOrderController extends UnicastRemoteObject implements Serializable {
+    IService service;
     List<Product> productsList;
     List<Integer> productsQuantities;
 
-    public PlaceOrderController(){
+    public PlaceOrderController() throws RemoteException {
 
     }
 
-    public void setUp(Service service) {
+    public void setUp(IService service) {
         productsList = new ArrayList<>();
         productsQuantities = new ArrayList<>();
         this.service = service;
@@ -26,7 +29,7 @@ public class PlaceOrderController {
         return service.getAllProducts().stream().map(p -> p.getName()).collect(Collectors.toList());
     }
 
-    public Service getService() {
+    public IService getService() {
         return service;
     }
 
@@ -40,15 +43,15 @@ public class PlaceOrderController {
         return addressId;
     }
 
-    private boolean checkOrder(){
+    public boolean checkOrder(){
         for (int i = 0; i < productsList.size(); i++)
             if(!productsList.get(i).extractFromQuantity(productsQuantities.get(i)))
                 return false;
             return true;
     }
 
-    public double addOrder(int addressId, String payment){
-        if(!checkOrder())
+    public double addOrder(int addressId, String payment) {
+        if (!checkOrder())
             return -1;
         int orderId = service.addOrder(addressId, payment);
         for (int i = 0; i < productsList.size(); i++)

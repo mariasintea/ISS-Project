@@ -11,7 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.domain.Product;
 
-public class AddUpdateView {
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class AddUpdateView extends UnicastRemoteObject implements Serializable {
     @FXML
     Button sendButton;
     @FXML
@@ -24,10 +28,12 @@ public class AddUpdateView {
     TextField quantityField;
     AddUpdateController controller;
 
+    public AddUpdateView() throws RemoteException {
+    }
+
     /**
      * makes the set up for controller
      * @param controller - current controller
-     * @param operation -> add/update
      */
     public void setUp(String operation, AddUpdateController controller){
         this.controller = controller;

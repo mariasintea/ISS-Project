@@ -1,6 +1,8 @@
 package model.domain;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     int id;
     int address;
     String payment;

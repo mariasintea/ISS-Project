@@ -1,26 +1,29 @@
 package controllers;
 
 import model.domain.Product;
-import services.Service;
+import services.IService;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class MainPageAdministratorController{
+public class MainPageAdministratorController extends UnicastRemoteObject implements Serializable {
     Product selectedProduct;
-    Service service;
+    IService service;
 
-    public MainPageAdministratorController() {
+    public MainPageAdministratorController() throws RemoteException {
     }
 
     /**
      * makes the set up for controller
      * @param service - current service
      */
-    public void setUp(Service service){
+    public void setUp(IService service){
         this.service = service;
     }
 
-    public Service getService(){
+    public IService getService(){
         return service;
     }
 

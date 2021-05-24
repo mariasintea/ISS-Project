@@ -15,7 +15,7 @@ public class HibernateUtils {
     /**
      * initializes session
      */
-    public void initialize() {
+    public static void initialize() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
             sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
@@ -26,13 +26,14 @@ public class HibernateUtils {
     }
 
     public SessionFactory getSessionFactory(){
+        initialize();
         return sessionFactory;
     }
 
     /**
      * closes session
      */
-    public void close(){
+    public static void close(){
         if ( sessionFactory != null ) {
             sessionFactory.close();
         }

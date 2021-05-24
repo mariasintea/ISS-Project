@@ -10,5 +10,5 @@ public interface Observable {
     /**
      * notifies observers that an update is required
      */
-    void notifyObservers();
+    void notifyObservers() throws Exception;
 }

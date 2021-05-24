@@ -1,6 +1,8 @@
 package model.domain;
 
-public class PayPalUser {
+import java.io.Serializable;
+
+public class PayPalUser implements Serializable {
     long id;
     String username;
     String password;

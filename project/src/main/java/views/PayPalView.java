@@ -9,14 +9,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class PayPalView {
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class PayPalView extends UnicastRemoteObject implements Serializable {
     @FXML
     TextField username;
     @FXML
     PasswordField password;
     PayPalController controller;
 
-    public PayPalView() {
+    public PayPalView() throws RemoteException {
     }
 
     public void setUp(PayPalController controller) {

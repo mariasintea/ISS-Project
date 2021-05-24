@@ -1,5 +1,7 @@
 package model.domain;
 
+import java.io.Serializable;
+
 /**
  * Product
  * - id: int; product's id
@@ -7,7 +9,7 @@ package model.domain;
  * - price: double; product's price
  * - availableQuantity: int; number of available products
  */
-public class Product{
+public class Product implements Serializable {
     int id;
     String name;
     double price;

@@ -3,7 +3,6 @@ package views;
 import controllers.PayPalController;
 import controllers.PlaceOrderController;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlaceOrderView {
+public class PlaceOrderView extends UnicastRemoteObject implements Serializable {
     @FXML
     ChoiceBox<String> productsList;
     @FXML
@@ -37,7 +39,7 @@ public class PlaceOrderView {
     TextField countryField;
     PlaceOrderController controller;
 
-    public PlaceOrderView(){
+    public PlaceOrderView() throws RemoteException {
 
     }
 
@@ -87,40 +89,42 @@ public class PlaceOrderView {
             return;
         }
         int addressId = controller.addAddress(streetField.getText(), Integer.valueOf(numberField.getText()), cityField.getText(), countyField.getText(), countryField.getText());
-        double total = controller.addOrder(addressId, paymentField.getValue());
 
-        if(paymentField.getValue().equals("paypal") && total >= 0.0)
+        if(paymentField.getValue().equals("paypal"))
         {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/PaypalPage.fxml"));
-            try {
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setTitle("Pay with PayPal");
-                stage.setScene(scene);
+            if(controller.checkOrder()) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/PaypalPage.fxml"));
+                try {
+                    Scene scene = new Scene(loader.load());
+                    Stage stage = new Stage();
+                    stage.setTitle("Pay with PayPal");
+                    stage.setScene(scene);
 
-                PayPalView view = loader.getController();
-                PayPalController new_controller = new PayPalController();
-                new_controller.setUp(controller.getService());
-                view.setUp(new_controller);
+                    PayPalView view = loader.getController();
+                    PayPalController new_controller = new PayPalController();
+                    new_controller.setUp(controller.getService());
+                    view.setUp(new_controller);
 
-                stage.show();
-                stage.setOnHiding(new EventHandler<WindowEvent>() {
-                    @Override
-                    public void handle(WindowEvent event) {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Order Completed!");
-                        alert.setContentText("Order Total: " + total);
-                        alert.showAndWait();
-                    }
-                });
-            }
-            catch (Exception e)
-            {
+                    stage.show();
+                    stage.setOnHiding(new EventHandler<WindowEvent>() {
+                        @Override
+                        public void handle(WindowEvent event) {
+                            double total = controller.addOrder(addressId, paymentField.getValue());
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("PAYPAL PAYMENT ACCEPTED!");
+                            alert.setContentText("You just payed " + total + "!");
+                            alert.showAndWait();
+                        }
+                    });
+                } catch (Exception e) {
 
+                }
             }
         }
         else
+        {
+            double total = controller.addOrder(addressId, paymentField.getValue());
             if(total >= 0.0)
             {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -134,6 +138,7 @@ public class PlaceOrderView {
                 alert.setContentText("Not enough quantity for some products!");
                 alert.showAndWait();
             }
+        }
 
         Node node = (Node) event.getSource();
         Stage thisStage = (Stage) node.getScene().getWindow();

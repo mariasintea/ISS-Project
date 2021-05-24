@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PayPalView">
     <children>
-         <Label layoutX="200.0" layoutY="122.0" text="Pay with PayPal">
+         <Label layoutX="197.0" layoutY="125.0" text="Pay with PayPal">
              <font>
                  <Font size="30.0" />
              </font>
@@ -22,7 +22,7 @@
              </font>
          </Label>
          <TextField fx:id="username" layoutX="281.0" layoutY="196.0" />
-         <Button layoutX="260.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleConfirmPayment" prefHeight="25.0" prefWidth="83.0" text="Confirm payment" />
+         <Button layoutX="234.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleConfirmPayment" prefHeight="25.0" prefWidth="137.0" text="Confirm payment" />
          <PasswordField fx:id="password" layoutX="281.0" layoutY="250.0" />
      </children>
  </AnchorPane>

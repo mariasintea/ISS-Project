@@ -1,6 +1,8 @@
 package model.domain;
 
-public class ProductsInOrder {
+import java.io.Serializable;
+
+public class ProductsInOrder implements Serializable {
     int id;
     int orderId;
     int productId;

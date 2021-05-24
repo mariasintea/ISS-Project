@@ -12,12 +12,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.domain.Product;
-import services.Service;
+import services.IService;
 import services.observer.Observer;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class MainPageSalesmanView implements Observer{
+public class MainPageSalesmanView extends UnicastRemoteObject implements Serializable, Observer{
     @FXML
     TableView<Product> productsTable;
     @FXML
@@ -31,12 +34,12 @@ public class MainPageSalesmanView implements Observer{
     ObservableList<Product> model = FXCollections.observableArrayList();
     MainPageSalesmanController controller;
 
-    public MainPageSalesmanView() {
+    public MainPageSalesmanView() throws RemoteException {
     }
 
     public void setUp(MainPageSalesmanController controller){
         this.controller = controller;
-        Service service = controller.getService();
+        IService service = controller.getService();
         service.addObserver(this);
         loadTable();
     }
